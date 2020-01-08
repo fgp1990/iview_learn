@@ -7,7 +7,8 @@
            name属性需要在router文件里面设置后才能使用 -->
       <router-link v-bind:to="{name: 'about'}">About</router-link>
     </div>
-    <!-- router-view是一个视图渲染组件 -->
+    <!-- router-view是一个视图渲染组件。如果没有任何属性标识，那它就绑定到default组件上。如果有，就绑定到指定组件。
+         具体属性在router的component里面定义。如果有，就按照规则绑定。如果没有，就跳过不显示-->
     <router-view />
     <router-view name='email' />
     <router-view name='tel' />

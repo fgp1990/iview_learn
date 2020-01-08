@@ -26,7 +26,11 @@ export default [
     // 冒号后面是个变量
     path: '/argu/:name',
     name: 'argu',
-    component: () => import('@/views/argu.vue')
+    components: {
+      default: () => import('@/views/argu.vue'),
+      // email: () => import('@/views/parent.vue'),
+      tel: () => import('@/views/child.vue')
+    }
   },
   {
     // 这是路由套嵌
