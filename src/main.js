@@ -10,4 +10,3 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-阿斯蒂芬
