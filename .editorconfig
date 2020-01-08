@@ -1,0 +1,15 @@
+# 这是根目录，不需要再向上查找
+root = true
+# 匹配适用的文件。这是以{}结尾的文件
+[*.{js,jsx,ts,tsx,vue}]
+# 上面匹配上的文件的规则
+# 缩进使用空格
+indent_style = space
+# 缩进统一为2字符
+indent_size = 2
+# 删除行收尾的空格
+trim_trailing_whitespace = true
+# 每个文件以空行结束
+insert_final_newline = true
+# 字符集
+charset = utf-8
