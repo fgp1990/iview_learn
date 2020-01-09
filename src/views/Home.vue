@@ -2,6 +2,10 @@
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/img/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <b>{{ food }}</b>
+    <br>
+    <b>{{ drink }}</b>
+    <br>
     <button @click="handleClick('back')">返回上一页</button>
     <button @click="handleClick('push')">跳转到parent</button>
     <button @click="handleClick('replace')">替换到parent</button>
@@ -16,6 +20,36 @@ export default {
   name: 'home',
   components: {
     // HelloWorld
+  },
+  props: {
+    // 这个food并不要求和router里面route.query.food中的food一致，个人觉得应该是和参数数量有关
+    food: {
+      type: String,
+      default: 'food'
+    },
+    drink: {
+      type: String,
+      default: 'drink'
+    }
+  },
+  // 这是组件内守卫，和路由守卫类似。去哪里，从哪里，干什么。需要有next()函数，不然就卡主。
+  // 这是在路由进入之前调用，此时页面还没有渲染，就无法使用this函数获取页面内容
+  beforeRouteEnter(to, from, next) {
+    // console.log(from.name)
+    // 如果想用this,可以这样
+    // next()
+    next(vm => {
+      // 这个vm就是this组件的内容
+      // console.log(vm)
+    })
+  },
+  beforeRouteLeave(to, from, next) {
+    // 这里面是可以使用this的
+    // 当用户要离开页面，提示用户没有保存。就用这个。
+    // const leave = confirm('你摇滚了吗？')
+    // if (leave) next()
+    // else next(false)
+    next()
   },
   methods: {
     handleClick(type) {
