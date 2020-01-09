@@ -113,6 +113,10 @@ export default [
     redirect: to => '/about'
   },
   {
+    path: '/store',
+    component: () => import('@/views/store.vue')
+  },
+  {
     // 万能匹配，这是按顺序匹配的，纯粹按顺序。
     path: '*',
     component: () => import('@/views/error_404.vue')

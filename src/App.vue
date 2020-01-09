@@ -12,9 +12,11 @@
 
     <!-- <transition-group name="router"> -->
     <!-- 这个transition还有一种变量写法
-         这种写法需要在下面script里面加上export default -->
+         这种写法需要在下面script里面加上export default
+         不管是上面还是下面这种写法，只要使用了router-view就会有特殊效果
+         这个冒号貌似是用了，后面的内容就是变量，不用就是字符串。但是为什么必须是name没搞懂 -->
     <transition-group :name="routerTransition">
-      <!-- router-view是一个视图渲染组件。如果没有任何属性标识，那它就绑定到default组件上。如果有，就绑定到指定组件。
+      <!-- router-view是一个视图渲染组件。如果没有任何name属性标识，那它就绑定到default组件上。如果有，就绑定到指定组件。
          具体属性在router的component里面定义。如果有，就按照规则绑定。如果没有，就跳过不显示
          router里面有很多不同路径，它会自己卡component里面的属性，卡哪个算哪个-->
       <router-view key="default"/>
