@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
-import Bus from './lib/bus'
+import router from './router' /** 这是路由模块 */
+import store from './store' /** 这是状态管理模块 */
+import Bus from './lib/bus' /** 这是通信模块 */
 
 // 告警提示控制，false表示是生产环境，使用生产模式，不产生console告警
 Vue.config.productionTip = false
