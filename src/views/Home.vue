@@ -9,12 +9,15 @@
     <button @click="handleClick('back')">返回上一页</button>
     <button @click="handleClick('push')">跳转到parent</button>
     <button @click="handleClick('replace')">替换到parent</button>
+    <button @click="getInfo">请求数据</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
+// import axios from 'axios'
+import { getUserInfo } from '@/api/user'
 
 export default {
   name: 'home',
@@ -87,6 +90,17 @@ export default {
           name: 'parent'
         })
       }
+    },
+    // 这是在这里定义getInfo函数，下面还有个调用axios里面定义好的函数
+    // getInfo () {
+    //   axios.post('/coupon/getCustomerCouponNum', { userId: 21 }).then(res => {
+    //     console.log(res)
+    //   })
+    // }
+    getInfo () {
+      getUserInfo({ userId: 21 }).then(res => {
+        console.log('res: ', res)
+      })
     }
   }
 }

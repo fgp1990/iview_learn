@@ -13,6 +13,8 @@
     <p>{{ userName }}</p>
     <p>{{ tmptest }}</p>
     <p>{{ appNameWithVersion }}</p>
+    <button @click="handleChangeAppName">修改appName</button>
+    <p>{{ appVersion }}</p>
   </div>
 </template>
 
@@ -20,16 +22,16 @@
 import AInput from '_c/AInput.vue'
 import AShow from '_c/AShow.vue'
 // 这是vuex的结构赋值，这个和下面的const { mapState }是互斥的。不用命名空间，就必须用这个
-// import { mapState } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 // 下面这个写法和上面一行等价
 // import vuex from 'vuex'
 // const mapState = vuex.mapState
 
-// 使用命名空间
-import { createNamespacedHelpers } from 'vuex'
-// 传入命名空间的名字，'user'
-const { mapState } = createNamespacedHelpers('user')
-// 命名空间结束
+// // 使用命名空间
+// import { createNamespacedHelpers } from 'vuex'
+// // 传入命名空间的名字，'user'
+// const { mapState } = createNamespacedHelpers('user')
+// // 命名空间结束
 
 export default {
   name: 'store',
@@ -48,6 +50,7 @@ export default {
     // 上下两种写法：
     // 三个点是vuex里面的展开操作符，它可以展开一个对象。mapState会返回一个对象，就是下面那一堆。
     // 这种写法并不好，只能传一个值。且不能传模块套嵌下内部的值。
+    //     (20200111:存疑，网上有例子传了多个值，这个值来自于store/state.js里面定义的key)
     // 比方创建一个user的store，里面有state等状态，这种方法取不到user里面的状态
     // ...mapState([
     //   'appName'
@@ -60,7 +63,10 @@ export default {
     }),
     // 另外提供一个使用命名空间的写法，需要在上面引入createNamespaceHelpers
     ...mapState({
-      userName: state => state.userName
+      userName: state => state.userName,
+      // 这是新增一个key-value，上面的是原本有，进行修改的
+      appVersion: state => state.appVersion
+
     }),
     // 不使用命名空间，但是能传'user'的方法。这里也可以不用传user
     // ...mapState('user', {
@@ -90,8 +96,30 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'SET_APP_NAME',
+      'SET_USER_NAME'
+    ]),
+    ...mapActions([
+      'updateAppName'
+    ]),
     handleInput(val) {
       this.inputValue = val
+    },
+    handleChangeAppName () {
+      // 第一个参数是在mutations.js里面定义得方法名。这个函数提交给mutations，然后mutitions修改值。
+      // this.$store.commit('SET_APP_NAME', 'newAppName')
+      // 第二个参数也可以是一个对象
+      // this.$store.commit('SET_APP_NAME', {
+      //   appName: 'newAppName'
+      // })
+      // 这里也可以写一个对象，包括了这两个参数
+      this.$store.commit({
+        type: 'SET_APP_NAME',
+        appName: 'newAppName'
+      })
+      this.updateAppName()
+      this.$store.commit('SET_APP_VERSION', 'appVersion')
     }
   }
 }

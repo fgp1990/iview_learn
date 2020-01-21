@@ -117,6 +117,11 @@ export default [
     component: () => import('@/views/store.vue')
   },
   {
+    path: '/count-to',
+    name: 'count_to',
+    component: () => import('@/views/count-to.vue')
+  },
+  {
     // 万能匹配，这是按顺序匹配的，纯粹按顺序。
     path: '*',
     component: () => import('@/views/error_404.vue')
